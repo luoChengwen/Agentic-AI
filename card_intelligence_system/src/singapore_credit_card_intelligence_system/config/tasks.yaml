@@ -1,0 +1,33 @@
+---
+scrape_credit_card_data:
+  description: "Scrape comprehensive credit card information from {target_bank_or_url}.
+    Extract all relevant details including:\n- Card name and type\n- Cashback/rewards
+    rates and structure  \n- Annual fees and fee waivers\n- Welcome bonuses or sign-up
+    offers\n- Key benefits and features\n- Eligibility requirements\n- Terms and conditions
+    highlights\n- Any promotional offers\n\nFocus on extracting structured data that
+    can be easily analyzed and compared."
+  expected_output: A comprehensive dataset containing all extracted credit card information
+    from the specified source, organized with clear categories and complete details
+    for each card found.
+  agent: singapore_credit_card_data_scraper
+analyze_and_structure_card_information:
+  description: |-
+    Process and analyze the scraped credit card data to create a structured, standardized comparison format. Organize the information to highlight:
+
+    - Key value propositions for each card
+    - Comparative analysis of rates and fees
+    - Best-suited customer profiles for each card
+    - Standout features or unique benefits
+    - Cost-benefit analysis summary
+
+    Create clear, actionable insights that help users understand which cards offer the best value for different spending patterns and financial goals.
+  expected_output: |-
+    A structured analysis report in markdown format containing:
+    1. Executive summary of all cards analyzed
+    2. Detailed comparison table with key metrics
+    3. Recommendations by card category ({card_category})
+    4. Key insights and standout features
+    5. Cost-benefit analysis for different user profiles
+  agent: credit_card_information_analyst
+  context:
+  - scrape_credit_card_data
