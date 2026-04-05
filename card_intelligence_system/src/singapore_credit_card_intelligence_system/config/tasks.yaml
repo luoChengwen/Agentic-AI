@@ -1,0 +1,64 @@
+---
+plan_credit_card_data_sources:
+  description: "Research and identify the best websites and sources for comprehensive
+    {card_category} credit card information in Singapore. Create a strategic plan
+    that includes:\n\n- Major Singapore bank websites (DBS, OCBC, UOB, Citi, HSBC,
+    Standard Chartered, etc.)\n- Leading comparison platforms (SingSaver, MoneySmart,
+    CompareHero, etc.) \n- Financial portal sites with reliable card information\n-
+    Any specialized credit card review sites\n\nFor each identified source, assess:\n-
+    Data comprehensiveness (number of cards covered)\n- Information quality and accuracy
+    \n- Ease of data extraction\n- Update frequency\n\nPrioritize sources that provide
+    the most complete picture of available {card_category} credit cards in the Singapore
+    market."
+  expected_output: |-
+    A prioritized list of websites to scrape with rationale for each choice, including:
+    1. Primary sources (highest priority for comprehensive data)
+    2. Secondary sources (additional coverage and verification)
+    3. Specific URLs or page sections to target
+    4. Expected data types and structure from each source
+    5. Recommended scraping sequence for optimal data collection
+  agent: credit_card_research_planner
+scrape_credit_card_data:
+  description: "Execute the comprehensive data collection plan by scraping credit
+    card information from the prioritized sources identified by the research planner.
+    Extract detailed information for each {card_category} credit card with special
+    emphasis on:\n\n**MANDATORY FINANCIAL DETAILS:**\n- Annual fees (exact amounts
+    in SGD)\n- Annual fee waivers and conditions\n- Cashback/reward rates and structures
+    \ \n- Welcome bonuses and promotional offers\n- Minimum income requirements\n\n**ADDITIONAL
+    CARD DETAILS:**\n- Card names and types\n- Key benefits and features\n- Eligibility
+    criteria (age, income, etc.)\n- Terms and conditions highlights\n- Monthly/yearly
+    caps on rewards\n\nFollow the recommended scraping sequence from the planner and
+    ensure annual fee information is captured for every single card found. If annual
+    fee information is missing, flag it clearly in the output."
+  expected_output: A comprehensive dataset containing all extracted credit card information
+    from the specified source, organized with clear categories and complete details
+    for each card found.
+  agent: singapore_credit_card_data_scraper
+  context:
+  - plan_credit_card_data_sources
+analyze_and_structure_card_information:
+  description: |-
+    Process and analyze the scraped credit card data to create a structured, standardized comparison format with dual outputs. Organize the information to highlight:
+
+    **KEY ANALYSIS AREAS:**
+    - Annual fee comparison and value analysis
+    - Cashback/reward rates comparison
+    - Cost-benefit analysis by spending patterns
+    - Best-suited customer profiles for each card
+    - Standout features or unique benefits
+
+    **OUTPUT REQUIREMENTS:**
+    1. Create a detailed markdown analysis report
+    2. Generate a CSV-formatted data table for Excel import
+    3. Ensure annual fees are prominently featured in all comparisons
+    4. Include clear recommendations based on total cost of ownership
+
+    Focus on helping users understand which cards offer the best value considering annual fees versus benefits for different spending patterns and financial goals.
+  expected_output: |-
+    A comprehensive analysis package containing:
+    1. **Markdown Report**: Executive summary, detailed comparison table, recommendations by {card_category}, key insights, and cost-benefit analysis
+    2. **CSV Data Export**: Complete structured data in CSV format ready for Excel import, with columns for Card Name, Annual Fee, Fee Waiver, Cashback Rate, Welcome Bonus, Min Income, Key Benefits
+    3. **Annual Fee Analysis**: Special focus section analyzing annual fee structures and their impact on card value
+  agent: credit_card_information_analyst
+  context:
+  - scrape_credit_card_data
